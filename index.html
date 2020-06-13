@@ -129,6 +129,17 @@
             waterMaterial.addToRenderList(skybox);
             waterMaterial.addToRenderList(sphere);
         
+            // Create the "God Rays" effect (volumetric light scattering)
+	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+
+	// By default it uses a billboard to render the sun, just apply the desired texture
+	// position and scale
+	godrays.mesh.material.diffuseTexture = new BABYLON.Texture('textures/sun.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
+	godrays.mesh.material.diffuseTexture.hasAlpha = true;
+	godrays.mesh.position = new BABYLON.Vector3(-150, 150, 150);
+	godrays.mesh.scaling = new BABYLON.Vector3(350, 350, 350);
+            
+            
             return scene;
         };
 var engine;
