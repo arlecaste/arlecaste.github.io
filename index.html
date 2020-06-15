@@ -144,7 +144,7 @@
 	godrays.mesh.scaling = new BABYLON.Vector3(150, 150, 150);
             light.position = godrays.mesh.position;
             
-		BABYLON.SceneLoader.ImportMesh("", "./scenes/", "message.obj", scene, (newMeshes, particlesSystems, skeletons), {
+		BABYLON.SceneLoader.ImportMesh("", "./scenes/", "message.obj", scene, function(newMeshes, particlesSystems, skeletons), {
 					       
 					       });
 		
