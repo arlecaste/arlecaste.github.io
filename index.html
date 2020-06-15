@@ -63,7 +63,8 @@
         </div>
         </center>
     <script>
-        var canvas = document.getElementById("renderCanvas");
+        		
+		var canvas = document.getElementById("renderCanvas");
 
         var engine = null;
         var scene = null;
@@ -80,7 +81,11 @@
             // Light
             //var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
         	var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 100), scene);
+        	//var light2 = new BABYLON.PointLight("Omni2", new BABYLON.Vector3(20, 20, 100), scene);
+			//var light4 = new BABYLON.PointLight("light4", new BABYLON.Vector3(20, 20, 100), scene);
 
+var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0), scene);
+	light3.intensity = 0.6;
             // Skybox
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -91,7 +96,7 @@
             skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
             skyboxMaterial.disableLighting = true;
             skybox.material = skyboxMaterial;
-        
+        /*
             // Water material
             var waterMaterial = new BABYLON.WaterMaterial("waterMaterial", scene, new BABYLON.Vector2(512, 512));
             waterMaterial.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/assets/waterbump.png", scene);
@@ -103,18 +108,32 @@
             waterMaterial.colorBlendFactor = 0;
             waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
             waterMaterial.colorBlendFactor = 0;
-        
+        *//*
             // Ground
-            var groundTexture = new BABYLON.Texture("//www.babylonjs.com/assets/sand.jpg", scene);
-            groundTexture.vScale = groundTexture.uScale = 4.0;
+            var groundTexture = new BABYLON.Texture("textures/sandGround.jpg", scene);
+            //groundTexture.vScale = groundTexture.uScale = 4.0;
         
             var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
             groundMaterial.diffuseTexture = groundTexture;
         
-            var ground = BABYLON.Mesh.CreateGround("ground", 512, 512, 32, scene, false);
-            ground.position.y = -1;
+            var ground = BABYLON.Mesh.CreateGround("ground", 256, 256, 32, scene, false);
+            ground.position.x = -128;
+            ground.position.y = 0.01;
             ground.material = groundMaterial;
+			*/
+			var groundTexture2 = new BABYLON.Texture("textures/metal3.jpg", scene);
+            groundTexture2.vScale = groundTexture2.uScale = 4.0;
+            //groundTexture2.uScale = groundTexture2.uScale = 4.0;
         
+            var groundMaterial2 = new BABYLON.StandardMaterial("groundMaterial2", scene);
+            groundMaterial2.diffuseTexture = groundTexture2;
+			var ground2 = BABYLON.Mesh.CreateGround("ground2", 512, 512, 32, scene, false);
+            //ground.position.y = -1;
+			//ground2.position.x = 128;
+
+            ground2.position.y = 0.01;
+            ground2.material = groundMaterial2;
+        /*
             // Water mesh
             var waterMesh = BABYLON.Mesh.CreateGround("waterMesh", 512, 512, 32, scene, false);
             waterMesh.material = waterMaterial;
@@ -128,21 +147,10 @@
             sphere.material = sphereMaterial;
         */
             // Configure water material
-            waterMaterial.addToRenderList(ground);
-            waterMaterial.addToRenderList(skybox);
+          //  waterMaterial.addToRenderList(ground);
+         //   waterMaterial.addToRenderList(skybox);
          //   waterMaterial.addToRenderList(sphere);
         
-		
-		//var myPlane = BABYLON.MeshBuilder.CreatePlane("myPlane", {width: 50, height: 20}, scene);
-		var plane = BABYLON.MeshBuilder.CreatePlane("plane", {height:10, width: 40, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-		plane.position.y = 10;
-		var matMessage = new BABYLON.StandardMaterial("matMessage", scene);
-  matMessage.diffuseTexture = new BABYLON.Texture("textures/hello.png", scene);
-  matMessage.diffuseTexture.hasAlpha = true;
-  matMessage.backFaceCulling = false;
-  plane.material = matMessage;
-		
-		
             // Create the "God Rays" effect (volumetric light scattering)
 	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
 	///godrays.position.z = 250;
@@ -151,10 +159,188 @@
 	godrays.mesh.material.diffuseTexture = new BABYLON.Texture('textures/sun3.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
 	godrays.mesh.material.diffuseTexture.hasAlpha = true;
 	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
+	//godrays.mesh.position = new BABYLON.Vector3(-100, 50, 350);
 	godrays.mesh.position = new BABYLON.Vector3(0, 25, 350);
-	godrays.mesh.scaling = new BABYLON.Vector3(150, 150, 150);
+	//godrays.mesh.scaling = new BABYLON.Vector3(100, 100, 100);
+	godrays.mesh.scaling = new BABYLON.Vector3(200, 200, 200);
             light.position = godrays.mesh.position;
+            
+var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+	///godrays.position.z = 250;
+	// By default it uses a billboard to render the sun, just apply the desired texture
+	// position and scale
+	godraysMoon.mesh.material.diffuseTexture = new BABYLON.Texture('textures/pinkMoon5.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
+	godraysMoon.mesh.material.diffuseTexture.hasAlpha = true;
+	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
+	godraysMoon.mesh.position = new BABYLON.Vector3(180, 50, 350);
+	godraysMoon.mesh.scaling = new BABYLON.Vector3(50, 50, 50);
+          //  light2.position = godraysMoon.mesh.position;
+		
+		var godraysMoon2 = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon2', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+	///godrays.position.z = 250;
+	// By default it uses a billboard to render the sun, just apply the desired texture
+	// position and scale
+	godraysMoon2.mesh.material.diffuseTexture = new BABYLON.Texture('textures/greenMoon2.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
+	godraysMoon2.mesh.material.diffuseTexture.hasAlpha = true;
+	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
+	godraysMoon2.mesh.position = new BABYLON.Vector3(-180, 50, 350);
+	godraysMoon2.mesh.scaling = new BABYLON.Vector3(50, 50, 50);
+            //light4.position = godraysMoon2.mesh.position;
+		
+		// Shadows
+    var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+    shadowGenerator.useBlurExponentialShadowMap = true;
+    shadowGenerator.blurKernel = 32;
+	
+		BABYLON.SceneLoader.ImportMesh("", "./scenes/", "dummy3.babylon", scene, function (newMeshes, particleSystems, skeletons) {
+                var skeleton = skeletons[0];
+        
+				var materialChar = new BABYLON.StandardMaterial("materialChar", scene);
+				materialChar.diffuseColor = new BABYLON.Color3(0.44, 0.51, 0.22); //Olive green
+		
+                shadowGenerator.addShadowCaster(scene.meshes[0], true);
+                for (var index = 0; index < newMeshes.length; index++) {
+                    newMeshes[index].receiveShadows = false;;
+						newMeshes[index].scaling = new BABYLON.Vector3(3, 3, 3);
+						newMeshes[index].position.x -= 0.645;
+						newMeshes[index].material = materialChar;
 
+                }
+        
+                // ROBOT
+                skeleton.animationPropertiesOverride = new BABYLON.AnimationPropertiesOverride();
+                skeleton.animationPropertiesOverride.enableBlending = true;
+                skeleton.animationPropertiesOverride.blendingSpeed = 0.05;
+                skeleton.animationPropertiesOverride.loopMode = 1;
+            
+                var idleRange = skeleton.getAnimationRange("YBot_Idle");
+                var walkRange = skeleton.getAnimationRange("YBot_Walk");
+                var runRange = skeleton.getAnimationRange("YBot_Run");
+                var leftRange = skeleton.getAnimationRange("YBot_LeftStrafeWalk");
+                var rightRange = skeleton.getAnimationRange("YBot_RightStrafeWalk");
+                
+                // IDLE
+                if (idleRange) scene.beginAnimation(skeleton, idleRange.from, idleRange.to, true);
+        
+		
+				BABYLON.SceneLoader.ImportMesh("", "./scenes/", "dummy3.babylon", scene, function (newMeshes2, particleSystems2, skeletons2) {
+                var skeleton2 = skeletons2[0];
+        
+		
+			//Creation of a red material with alpha
+    var materialChar2 = new BABYLON.StandardMaterial("texture2", scene);
+    materialChar2.diffuseColor = new BABYLON.Color3(1, 0.7, 0.9); //Pink
+    //materialChar2.alpha = 0.3;
+		
+                for (var index = 0; index < newMeshes2.length; index++) {
+                    newMeshes2[index].receiveShadows = false;;
+						newMeshes2[index].scaling = new BABYLON.Vector3(3, 3, 3);
+						newMeshes2[index].position.x += 0.645;
+						    newMeshes2[index].material = materialChar2;
+
+                }
+        
+                // ROBOT
+                skeleton2.animationPropertiesOverride = new BABYLON.AnimationPropertiesOverride();
+                skeleton2.animationPropertiesOverride.enableBlending = true;
+                skeleton2.animationPropertiesOverride.blendingSpeed = 0.05;
+                skeleton2.animationPropertiesOverride.loopMode = 1;
+            
+                var idleRange2 = skeleton.getAnimationRange("YBot_Idle");
+                var walkRange2 = skeleton.getAnimationRange("YBot_Walk");
+                var runRange2 = skeleton.getAnimationRange("YBot_Run");
+                var leftRange2 = skeleton.getAnimationRange("YBot_LeftStrafeWalk");
+                var rightRange2 = skeleton.getAnimationRange("YBot_RightStrafeWalk");
+                
+                // IDLE
+                if (idleRange2) scene.beginAnimation(skeleton2, idleRange2.from, idleRange2.to, true);
+        
+            });	
+		
+            });	
+        
+		
+		scene.clearColor = new BABYLON.Color3(0, 0, 0);
+		
+		    var fountain = BABYLON.Mesh.CreateBox("foutain", 1.0, scene);
+			fountain.position.y = -2;
+		
+    // Create a particle system
+    var particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
+
+    //Texture of each particle
+    particleSystem.particleTexture = new BABYLON.Texture("textures/greenMoon2.png", scene);
+
+    // Where the particles come from
+    particleSystem.emitter = fountain; // the starting object, the emitter
+    particleSystem.minEmitBox = new BABYLON.Vector3(-1, 0, 0); // Starting all from
+    particleSystem.maxEmitBox = new BABYLON.Vector3(1, 0, 0); // To...
+
+    // Colors of all particles
+    particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0);
+    particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
+    particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0);
+
+    // Size of each particle (random between...
+    particleSystem.minSize = 0.1;
+    particleSystem.maxSize = 0.5;
+
+    // Life time of each particle (random between...
+    particleSystem.minLifeTime = 0.3;
+    particleSystem.maxLifeTime = 2.5;
+
+    // Emission rate
+    particleSystem.emitRate = 1500;
+
+    // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
+    particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+
+    // Set the gravity of all particles
+    particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0);
+
+    // Direction of each particle after it has been emitted
+    particleSystem.direction1 = new BABYLON.Vector3(-7, 8, 3);
+    particleSystem.direction2 = new BABYLON.Vector3(7, 8, -3);
+
+    // Angular speed, in radians
+    particleSystem.minAngularSpeed = 0;
+    particleSystem.maxAngularSpeed = Math.PI;
+
+    // Speed
+    particleSystem.minEmitPower = 1;
+    particleSystem.maxEmitPower = 3;
+    particleSystem.updateSpeed = 0.005;
+
+    // Start the particle system
+    particleSystem.start();
+/*
+    // Fountain's animation
+    var keys = [];
+    var animation = new BABYLON.Animation("animation", "rotation.x", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+                                                                    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+    // At the animation key 0, the value of scaling is "1"
+    keys.push({
+        frame: 0,
+        value: 0
+    });
+
+    // At the animation key 50, the value of scaling is "0.2"
+    keys.push({
+        frame: 50,
+        value: Math.PI
+    });
+
+    // At the animation key 100, the value of scaling is "1"
+    keys.push({
+        frame: 100,
+        value: 0
+    });
+
+    // Launch animation
+    animation.setKeys(keys);
+    fountain.animations.push(animation);
+    scene.beginAnimation(fountain, 0, 100, true);
+		*/
 		
             return scene;
         };
