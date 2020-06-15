@@ -132,6 +132,9 @@
             waterMaterial.addToRenderList(skybox);
          //   waterMaterial.addToRenderList(sphere);
         
+		
+		var myPlane = BABYLON.MeshBuilder.CreatePlane("myPlane", {width: 50, height: 20}, scene);
+		
             // Create the "God Rays" effect (volumetric light scattering)
 	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
 	///godrays.position.z = 250;
