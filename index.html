@@ -133,7 +133,15 @@
          //   waterMaterial.addToRenderList(sphere);
         
 		
-		var myPlane = BABYLON.MeshBuilder.CreatePlane("myPlane", {width: 50, height: 20}, scene);
+		//var myPlane = BABYLON.MeshBuilder.CreatePlane("myPlane", {width: 50, height: 20}, scene);
+		var plane = BABYLON.MeshBuilder.CreatePlane("plane", {height:10, width: 40, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+		plane.position.y = 10;
+		var matMessage = new BABYLON.StandardMaterial("matMessage", scene);
+  matMessage.diffuseTexture = new BABYLON.Texture("img/hello.png", scene);
+  matMessage.diffuseTexture.hasAlpha = true;
+  matMessage.backFaceCulling = false;
+  plane.material = matMessage;
+		
 		
             // Create the "God Rays" effect (volumetric light scattering)
 	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
