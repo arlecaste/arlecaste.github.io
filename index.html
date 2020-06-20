@@ -108,7 +108,7 @@
             waterMaterial.colorBlendFactor = 0;
             waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
             waterMaterial.colorBlendFactor = 0;
-        *//*
+        */
             // Ground
             var groundTexture = new BABYLON.Texture("textures/sandGround.jpg", scene);
             //groundTexture.vScale = groundTexture.uScale = 4.0;
@@ -120,7 +120,7 @@
             ground.position.x = -128;
             ground.position.y = 0.01;
             ground.material = groundMaterial;
-			*/
+			
 		/*
 			var groundTexture2 = new BABYLON.Texture("textures/metal3.jpg", scene);
             groundTexture2.vScale = groundTexture2.uScale = 4.0;
@@ -491,7 +491,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
     scene.registerBeforeRender(function () {
         if (morph) {
             mesh = morphing(mesh, m, paths, targetPaths, deltas, deltaColors);
-	mesh.position = new BABYLON.Vector3(0, 14, -10);
+	mesh.position = new BABYLON.Vector3(0, 14, 20);
         }
         rx += deltarx;
         ry -= deltary;
