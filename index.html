@@ -85,7 +85,7 @@
 			//var light4 = new BABYLON.PointLight("light4", new BABYLON.Vector3(20, 20, 100), scene);
 
 var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0), scene);
-	light3.intensity = 0.6;
+	//light3.intensity = 0.6;
             // Skybox
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -109,6 +109,7 @@ var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0)
             waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
             waterMaterial.colorBlendFactor = 0;
         */
+		/*
             // Ground
             var groundTexture = new BABYLON.Texture("textures/sandGround.jpg", scene);
             //groundTexture.vScale = groundTexture.uScale = 4.0;
@@ -120,21 +121,21 @@ var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0)
             ground.position.x = -128;
             ground.position.y = 0.01;
             ground.material = groundMaterial;
-			
-		/*
+			*/
+		
 			var groundTexture2 = new BABYLON.Texture("textures/metal3.jpg", scene);
             groundTexture2.vScale = groundTexture2.uScale = 4.0;
             //groundTexture2.uScale = groundTexture2.uScale = 4.0;
         
             var groundMaterial2 = new BABYLON.StandardMaterial("groundMaterial2", scene);
             groundMaterial2.diffuseTexture = groundTexture2;
-			var ground2 = BABYLON.Mesh.CreateGround("ground2", 10, 10, 32, scene, false);
+			var ground2 = BABYLON.Mesh.CreateGround("ground2", 20, 20, 32, scene, false);
             //ground.position.y = -1;
 			//ground2.position.x = 128;
 
             ground2.position.y = 0.01;
             ground2.material = groundMaterial2;
-		*/
+		
         /*
             // Water mesh
             var waterMesh = BABYLON.Mesh.CreateGround("waterMesh", 512, 512, 32, scene, false);
