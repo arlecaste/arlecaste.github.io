@@ -471,7 +471,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
     harmonic(m, lat, lng, paths);
     var mesh = BABYLON.Mesh.CreateRibbon("ribbon", paths, true, false, 0, scene, true);
     mesh.freezeNormals();
-    mesh.scaling = new BABYLON.Vector3(1, 1, 1);
+    
     mesh.material = fireMaterial;
 		
 	
@@ -499,7 +499,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
         rx += deltarx;
         ry -= deltary;
 	    mesh.position = new BABYLON.Vector3(0, 14, 200);
-	    mesh.scaling = new BABYLON.Vector3(10, 10, 10);
+	   
         mesh.rotation.y = ry;
         mesh.rotation.z = rx;
 	
