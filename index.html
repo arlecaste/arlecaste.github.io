@@ -468,6 +468,8 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
     mesh.freezeNormals();
     mesh.scaling = new BABYLON.Vector3(1, 1, 1);
     mesh.material = fireMaterial;
+		mesh.position = new BABYLON.Vector3(0, 3, 0);
+	
     // Volumetric Light
     var volLight = new BABYLON.VolumetricLightScatteringPostProcess("vl", 1.0, camera, mesh, 50, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
     volLight.exposure = 0.15;
