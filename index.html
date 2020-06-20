@@ -150,7 +150,7 @@ var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0)
           //  waterMaterial.addToRenderList(ground);
          //   waterMaterial.addToRenderList(skybox);
          //   waterMaterial.addToRenderList(sphere);
-        
+        /*
             // Create the "God Rays" effect (volumetric light scattering)
 	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
 	///godrays.position.z = 250;
@@ -164,7 +164,7 @@ var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0)
 	//godrays.mesh.scaling = new BABYLON.Vector3(100, 100, 100);
 	godrays.mesh.scaling = new BABYLON.Vector3(200, 200, 200);
             //light.position = godrays.mesh.position;
-            
+            */
 var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
 	///godrays.position.z = 250;
 	// By default it uses a billboard to render the sun, just apply the desired texture
