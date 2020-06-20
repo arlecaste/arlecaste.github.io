@@ -116,7 +116,7 @@ var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0)
             var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
             groundMaterial.diffuseTexture = groundTexture;
         
-            var ground = BABYLON.Mesh.CreateGround("ground", 50, 50, 32, scene, false);
+            var ground = BABYLON.Mesh.CreateGround("ground", 10, 10, 10, scene, false);
             ground.position.x = -128;
             ground.position.y = 0.01;
             ground.material = groundMaterial;
