@@ -84,8 +84,8 @@
         	//var light2 = new BABYLON.PointLight("Omni2", new BABYLON.Vector3(20, 20, 100), scene);
 			//var light4 = new BABYLON.PointLight("light4", new BABYLON.Vector3(20, 20, 100), scene);
 
-//var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0), scene);
-	//light3.intensity = 0.6;
+var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, 1, 0), scene);
+	light3.intensity = 0.6;
             // Skybox
             var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -491,7 +491,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
     scene.registerBeforeRender(function () {
         if (morph) {
             mesh = morphing(mesh, m, paths, targetPaths, deltas, deltaColors);
-	mesh.position = new BABYLON.Vector3(0, 14, 20);
+	mesh.position = new BABYLON.Vector3(0, 14, -20);
         }
         rx += deltarx;
         ry -= deltary;
