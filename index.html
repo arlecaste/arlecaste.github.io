@@ -316,6 +316,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
 
     // Start the particle system
     particleSystem.start();
+		fountain.isVisible = false,
 /*
     // Fountain's animation
     var keys = [];
@@ -496,9 +497,10 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
         }
         rx += deltarx;
         ry -= deltary;
+	    mesh.position = new BABYLON.Vector3(0, 14, -20);
         mesh.rotation.y = ry;
         mesh.rotation.z = rx;
-	mesh.position = new BABYLON.Vector3(0, 14, -20);
+	
     });
 
     scene.onDispose = function () {
