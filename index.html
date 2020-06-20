@@ -492,12 +492,13 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
     scene.registerBeforeRender(function () {
         if (morph) {
             mesh = morphing(mesh, m, paths, targetPaths, deltas, deltaColors);
-	mesh.position = new BABYLON.Vector3(0, 14, -20);
+	
         }
         rx += deltarx;
         ry -= deltary;
         mesh.rotation.y = ry;
         mesh.rotation.z = rx;
+	mesh.position = new BABYLON.Vector3(0, 14, -20);
     });
 
     scene.onDispose = function () {
