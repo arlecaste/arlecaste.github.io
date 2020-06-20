@@ -64,173 +64,118 @@
         </center>
     <script>
         		
-			
-		var canvas = document.getElementById("renderCanvas");
+	 var canvas = document.getElementById("renderCanvas");
 
         var engine = null;
         var scene = null;
         var sceneToRender = null;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+        /*
+        	How to use the Web Audio 3D Analyser to create stunning effects
+        	by Steve 'Stv' Duran for BabylonJS featured demos on 06.12.2015
+        */
+        var bar = [];
+        var square = "//www.babylonjs.com/demos/AudioAnalyser/square.jpg";
+        var bjs = "//www.babylonjs.com/demos/AudioAnalyser/metal.png";
+        var fft;
+        
+        // Better random function
+        function rnd(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        
+        // Create the equalizer
+        function createRingcubes(r, nb, scene) {
+            var TWO_PI = Math.PI * 2;
+            var angle = TWO_PI / nb;
+            var cube;
+        
+            // Create a really cool metal material with bump :)
+            var m1 = new BABYLON.StandardMaterial("m", scene);
+            m1.diffuseTexture = new BABYLON.Texture(square, scene);
+            m1.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/demos/AudioAnalyser/grained_uv.png", scene);
+            m1.reflectionTexture = new BABYLON.Texture(bjs, scene);
+            m1.reflectionTexture.level = 0.8;
+            m1.reflectionTexture.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
+        
+            for (var i = 0; i <= nb; i++) {
+                if (i === 0) {
+                    bar[i] = BABYLON.Mesh.CreateBox("b", 0.02, scene);
+        
+                    bar[i].material = m1;
+                    bar[i].isVisible = false;
+                }
+                else {
+                    bar[i] = bar[0].createInstance("b" + i);
+        
+                    bar[i].position.x = r * Math.sin(angle * i);
+                    bar[i].position.y = r * Math.cos(angle * i);
+                    bar[i].position.z = 0;
+        
+                    bar[i].scaling.y = 20.0;
+                    bar[i].scaling.x = 200.0;
+        
+                    // Remember, you learned it in the "Lookat" PG !
+                    bar[i].lookAt(new BABYLON.Vector3(0, 0, 0));
+                }
+        
+            }
+        }
+        
         var createScene = function (engine) {
             var scene = new BABYLON.Scene(engine);
+            scene.clearColor = BABYLON.Color3.Black();
         
-            // Camera
-            //var camera = new BABYLON.ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 4, 100, BABYLON.Vector3.Zero(), scene);
-            var camera = new BABYLON.ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 2.1, 55, BABYLON.Vector3.Zero(), scene);
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 25, BABYLON.Vector3.Zero(), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
             camera.attachControl(canvas, true);
-            
-            // Light
-            //var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-        	var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 100), scene);
-			    var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
-
-        	//var light2 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(20, 20, 100), scene);
-			
-			//light2.position = new BABYLON.Vector3(0, 25, -350);
-
-            // Skybox
-            var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
-            var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-            skyboxMaterial.backFaceCulling = false;
-            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("//www.babylonjs.com/assets/skybox/TropicalSunnyDay", scene);
-            skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-            skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-            skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-            skyboxMaterial.disableLighting = true;
-            skybox.material = skyboxMaterial;
         
-            // Water material
-            var waterMaterial = new BABYLON.WaterMaterial("waterMaterial", scene, new BABYLON.Vector2(512, 512));
-            waterMaterial.bumpTexture = new BABYLON.Texture("./scenes/waterbump.png", scene);
-            waterMaterial.windForce = -10;
-            waterMaterial.waveHeight = 0.5;
-            waterMaterial.bumpHeight = 0.1;
-            waterMaterial.waveLength = 0.1;
-            waterMaterial.waveSpeed = 50.0;
-            waterMaterial.colorBlendFactor = 0;
-            waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
-            waterMaterial.colorBlendFactor = 0;
+            var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
         
-            // Ground
-            var groundTexture = new BABYLON.Texture("//www.babylonjs.com/assets/sand.jpg", scene);
-            groundTexture.vScale = groundTexture.uScale = 4.0;
+            // Streaming sound using HTML5 Audio element
+            var music = new BABYLON.Sound("Music", "//www.babylonjs.com/demos/AudioAnalyser/cosmosis.mp3",
+                scene, null, { streaming: true, autoplay: true });
         
-            var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
-            groundMaterial.diffuseTexture = groundTexture;
+            // Here we go !
+            createRingcubes(20, 256, scene);
         
-            var ground = BABYLON.Mesh.CreateGround("ground", 512, 512, 32, scene, false);
-            ground.position.y = -1;
-            ground.material = groundMaterial;
+            // Create some cool material.
+            var mball = new BABYLON.StandardMaterial("m", scene);
+            mball.backFaceCulling = false;
+            mball.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/demos/AudioAnalyser/grained_uv.png", scene);
+            mball.reflectionTexture = new BABYLON.Texture(bjs, scene);
+            mball.reflectionTexture.level = 0.8;
+            mball.reflectionTexture.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
         
-            // Water mesh
-            var waterMesh = BABYLON.Mesh.CreateGround("waterMesh", 512, 512, 32, scene, false);
-            waterMesh.material = waterMaterial;
+            // Center sphere
+            var sphere = BABYLON.Mesh.CreateSphere("s", 32, 20, scene);
+            sphere.material = mball;
         
-            // Sphere
-            var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", scene);
-            sphereMaterial.diffuseTexture = new BABYLON.Texture("//www.babylonjs.com/assets/wood.jpg", scene);
-			
-			//    var plane = BABYLON.MeshBuilder.CreatePlane("plane", {height:10, width: 40, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-		//		plane.position.y = 10;
-	/*			
-				
-				 //Create dynamic texture
-    var textureResolution = 512;
-	var textureGround = new BABYLON.DynamicTexture("dynamic texture", {width:512, height:256}, scene);   
-	var textureContext = textureGround.getContext();
-	
-	var materialGround = new BABYLON.StandardMaterial("Mat", scene);    				
-	materialGround.diffuseTexture = textureGround;
-	materialGround.alpha = 0.5;
-	plane.material = materialGround;
-	
-    //Add text to dynamic texture
-    var font = "bold 44px monospace";
-    textureGround.drawText("Hello Sunrise", 75, 135, font, "green", "#ffffff", true, true);
-	*/
-	  var mat = new BABYLON.StandardMaterial("dog", scene);
-  mat.diffuseTexture = new BABYLON.Texture("img/hello.png", scene);
-  mat.diffuseTexture.hasAlpha = true;
-  mat.backFaceCulling = false;
-  //var box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
-  //plane.material = mat;
-	
-	
-	
-	// path function
-  var pathFunction = function(k) {
-    var path = []; 
-    for (var i = 0; i < 60; i++) {
-      var x =  i - 30;
-      var y = k;
-      var z = 0;
-      path.push(new BABYLON.Vector3(x, y, z));
-    }
-    return path;
-  };
-  
-  // update path function
-  var updatePath = function(path, k) {
-    for (var i = 0; i < path.length; i++) {
-      var x = path[i].x;
-      //var z = path[i].z;
-      var y = path[i].y;
-      var z = 20 * Math.sin(i/ 10) * Math.sin(k + z / 40);  
-      path[i].x = x;
-      path[i].y = y;
-      path[i].z = z;
-    }
-  };
-  
-  // ribbon creation
-  var sideO = BABYLON.Mesh.BACKSIDE;
-  var pathArray = [];
-  for(var i = -20; i < 20; i++) {
-    pathArray.push(pathFunction(i * 2));
-  }
-  var mesh = BABYLON.Mesh.CreateRibbon("ribbon", pathArray, false, false, 0, scene, true, sideO);
-  mesh.material = mat;
-  mesh.position.y = 10;
-  //mesh.rotation.z += Math.PI * 0.5;;
-  
-  // morphing
-  var k = 0;
-  scene.registerBeforeRender(function(){
-	// update pathArray
-	for(var p = 0; p < pathArray.length; p++) {
-    	updatePath(pathArray[p], k);
-  	}
-	// ribbon update
-	mesh = BABYLON.Mesh.CreateRibbon(null, pathArray, null, null, null, null, null, null, mesh);
-	k += 0.05;
-	//pl.position = camera.position;
-  });
-        /*
-            var sphere = BABYLON.Mesh.CreateSphere("sphere", 32, 24, scene);
-            sphere.position.y = 20;
-            sphere.material = sphereMaterial;
-       
-            // Configure water material
-            waterMaterial.addToRenderList(ground);
-            waterMaterial.addToRenderList(skybox);
-         //   waterMaterial.addToRenderList(sphere);
-         */
-            // Create the "God Rays" effect (volumetric light scattering)
-	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
-	///godrays.position.z = 250;
-	// By default it uses a billboard to render the sun, just apply the desired texture
-	// position and scale
-	godrays.mesh.material.diffuseTexture = new BABYLON.Texture('textures/sun3.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
-	godrays.mesh.material.diffuseTexture.hasAlpha = true;
-	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
-	godrays.mesh.position = new BABYLON.Vector3(0, 25, 350);
-	godrays.mesh.scaling = new BABYLON.Vector3(150, 150, 150);
-            light.position = godrays.mesh.position;
-            
-		//BABYLON.SceneLoader.ImportMesh("", "./scenes/", "message2.obj", scene, function(newMeshes, particlesSystems, skeletons) {
-					       
-		//			       });
-		
+            // Start the analyser
+            var myAnalyser = new BABYLON.Analyser(scene);
+            BABYLON.Engine.audioEngine.connectToAnalyser(myAnalyser);
+            myAnalyser.FFT_SIZE = 512;
+            myAnalyser.SMOOTHING = 0.9;
+        
+            var t = 0.0;
+            scene.registerBeforeRender(function () {
+        
+                fft = myAnalyser.getByteFrequencyData();
+        
+                // Scale cubes according to music ! :)
+                // here we multiply by 4 because we are working on a very little scene like (20x20x20)
+                for (var i = 0; i < bar.length; i++) {
+                    bar[i].scaling.z = fft[i] * 4;
+                }
+        
+                // Move camera
+                camera.alpha = 4.0 * (Math.PI / 20 + Math.cos(t / 35));
+                camera.beta = 1.5 * (Math.PI / 20 + Math.sin(t / 50));
+                camera.radius = 100 + (-25 + 25 * Math.sin(t / 30));
+        
+                t += 0.1;
+            });
+        
             return scene;
         };
 var engine;
@@ -254,7 +199,6 @@ try {
         window.addEventListener("resize", function () {
             engine.resize();
         });
-		
     
     </script>
 </body>
