@@ -498,7 +498,8 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
         }
         rx += deltarx;
         ry -= deltary;
-	    mesh.position = new BABYLON.Vector3(0, 14, 20);
+	    mesh.position = new BABYLON.Vector3(0, 14, 200);
+	    mesh.scaling = new BABYLON.Vector3(10, 10, 10);
         mesh.rotation.y = ry;
         mesh.rotation.z = rx;
 	
