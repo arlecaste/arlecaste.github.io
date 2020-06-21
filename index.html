@@ -147,7 +147,7 @@
             skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
             skyboxMaterial.disableLighting = true;
             skybox.material = skyboxMaterial;
-        
+        /*
             // Water material
             var waterMaterial = new BABYLON.WaterMaterial("waterMaterial", scene, new BABYLON.Vector2(512, 512));
            // waterMaterial.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/assets/waterbump.png", scene);
@@ -174,7 +174,7 @@
             // Water mesh
             var waterMesh = BABYLON.Mesh.CreateGround("waterMesh", 512, 512, 32, scene, false);
             waterMesh.material = waterMaterial;
-		
+		*/
 		    // fire material
     var fireMaterial = new BABYLON.StandardMaterial("fireMaterial", scene);
     var fireTexture = new BABYLON.FireProceduralTexture("fire", 256, scene);
