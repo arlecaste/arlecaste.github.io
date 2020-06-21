@@ -334,9 +334,19 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
 	godraysMoon.mesh.material.diffuseTexture = new BABYLON.Texture('textures/pinkMoon5.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
 	godraysMoon.mesh.material.diffuseTexture.hasAlpha = true;
 	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
-	godraysMoon.mesh.position = new BABYLON.Vector3(250, 70, 350);
+	godraysMoon.mesh.position = new BABYLON.Vector3(0, 70, 350);
 	godraysMoon.mesh.scaling = new BABYLON.Vector3(50, 50, 50);		
 		
+		
+	var godraysMoon2 = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon2', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+	///godrays.position.z = 250;
+	// By default it uses a billboard to render the sun, just apply the desired texture
+	// position and scale
+	godraysMoon2.mesh.material.diffuseTexture = new BABYLON.Texture('textures/greenMoon2.png', scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE);
+	godraysMoon2.mesh.material.diffuseTexture.hasAlpha = true;
+	//godrays.mesh.position = new BABYLON.Vector3(-150, 150, -250);
+	godraysMoon2.mesh.position = new BABYLON.Vector3(0, 70, -350);
+	godraysMoon2.mesh.scaling = new BABYLON.Vector3(50, 50, 50);
     scene.onDispose = function () {
         clearInterval(interval);
     }
