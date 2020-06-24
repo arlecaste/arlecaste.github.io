@@ -195,7 +195,7 @@
     new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
     new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2)
     ];
-
+/*
     // initial vars
     var delay = 4000;
     var steps = Math.floor(delay / 80);;
@@ -326,7 +326,7 @@
         mesh.rotation.y = ry;
         mesh.rotation.z = rx;
     });
-
+*/
 var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
 	///godrays.position.z = 250;
 	// By default it uses a billboard to render the sun, just apply the desired texture
@@ -354,7 +354,7 @@ var godraysMoon = new BABYLON.VolumetricLightScatteringPostProcess('godraysMoon'
 		
 		
             // Streaming sound using HTML5 Audio element
-            var music = new BABYLON.Sound("Music", "./scenes/On_The_Wing.mp3", 
+            var music = new BABYLON.Sound("Music", "./scenes/Sunrise_Alan_Walker.mp3", 
                 scene, null, { streaming: true, autoplay: true });
         
             // Here we go !
