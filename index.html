@@ -128,6 +128,19 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, -5
             var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
         scene, null, { streaming: true, autoplay: true });
         
+	 //var miloscPlane = BABYLON.MeshBuilder.CreateBox("plane", { width: 354.5, height: 0.1, depth: 350, sideOrientation: BABYLON.Mesh.FRONTSIDE, }, scene);
+    var miloscPlane = BABYLON.MeshBuilder.CreatePlane("plane", {width: 354, height: 350}, scene);
+    //miloscPlane.position.y = 50;
+    miloscPlane.rotation = new BABYLON.Vector3(Math.PI, 0, Math.PI);
+    miloscPlane.scaling = new BABYLON.Vector3(0.125, 0.125, 1);
+    miloscPlane.position.z = 0;
+    
+    var miloscMat = new BABYLON.StandardMaterial("milosc", scene);
+        miloscMat.diffuseTexture = new BABYLON.Texture("https://arlecaste.github.io/textures/pics/milosc13.png", scene);
+        miloscMat.diffuseTexture.hasAlpha = true;
+        miloscMat.backFaceCulling = false;
+
+    miloscPlane.material = miloscMat;
 		// Fountain object
     var fountain = BABYLON.Mesh.CreateBox("foutain", 1.0, scene);
     //fountain.position.z = 5;
@@ -236,8 +249,8 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, -5
           mat.diffuseTexture.hasAlpha = true;
           mat.backFaceCulling = false;
           //var box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
-          var box = BABYLON.MeshBuilder.CreateBox("myBox", {height: 70.9, width: 70, depth: 0.5}, scene);
-          box.material = mat;
+          //var box = BABYLON.MeshBuilder.CreateBox("myBox", {height: 70.9, width: 70, depth: 0.5}, scene);
+          //box.material = mat;
         
             // Center sphere
             //var sphere = BABYLON.Mesh.CreateSphere("s", 32, 20, scene);
