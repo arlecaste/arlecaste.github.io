@@ -83,9 +83,173 @@
         	
             engine.displayLoadingUI();
         
-        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
+        //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
+        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/A_Sky_Full_Of_Stars_Coldplay.mp3",
                 scene, null, { streaming: true, autoplay: true });
             
+        var myAnalyser = new BABYLON.Analyser(scene);
+        	BABYLON.Engine.audioEngine.connectToAnalyser(myAnalyser);
+        	myAnalyser.FFT_SIZE = 64;
+        	myAnalyser.SMOOTHING = 0.9;
+        	
+        	var spatialBoxArray = [];
+        	var spatialBoxArray2 = [];
+            var spatialBoxArray3 = [];
+            var spatialBoxArray4 = [];
+        	var spatialBox;
+        	var color;
+        	var hl = new BABYLON.HighlightLayer("hl", scene);
+        	for (var index = 0; index < myAnalyser.FFT_SIZE / 2; index++) {
+        	    spatialBox = BABYLON.Mesh.CreateBox("sb" + index, 1, scene);
+        	    spatialBox.position = new BABYLON.Vector3(index * 0.5 + 4, -3, -5);
+        	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+                
+                hl.addMesh(spatialBox, BABYLON.Color3.White());
+        	    //color = hsvToRgb(index / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
+        	    color = {r:1, g:1, b: 1};
+                spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	    spatialBoxArray.push(spatialBox);
+        
+                //spatialBox = BABYLON.Mesh.CreateBox("sba4" + index, 0.5, scene);
+        	    //spatialBox.position = new BABYLON.Vector3(index * 0.5 + 4, -3, -5);
+        	    //spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+                
+                //hl.addMesh(spatialBox, BABYLON.Color3.White());
+        	    //color = hsvToRgb(index / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
+        	    //spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	   // spatialBoxArray4.push(spatialBox);
+                
+        
+                spatialBox = BABYLON.Mesh.CreateBox("sb2" + index, 1, scene);
+                spatialBox.position = new BABYLON.Vector3(-index * 0.5 - 4, -3, -5);
+        	    //spatialBox.position = new BABYLON.Vector3(-index - 2, -3, -5);
+        	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+                color = {r:1, g:1, b: 1};	    
+                spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	    spatialBoxArray2.push(spatialBox);
+        	}
+        	var lastspb = spatialBoxArray[spatialBoxArray.length - 1];
+        	var lastspbsx = spatialBoxArray2[spatialBoxArray2.length - 1];
+        
+        
+            for (var index = 0, index2 = myAnalyser.FFT_SIZE / 2 - 1; index < myAnalyser.FFT_SIZE / 2; index++, index2--) {
+        	    spatialBox = BABYLON.Mesh.CreateBox("sba" + index, 1, scene);
+        	    spatialBox.position = new BABYLON.Vector3(lastspb.position.x + index * 0.5, -3, -5);
+        	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+        	    //color = hsvToRgb(index2 / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
+        	    color = {r:1, g:1, b: 1};
+                spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	    spatialBoxArray3.push(spatialBox);
+                hl.addMesh(spatialBox, BABYLON.Color3.White());
+        
+                spatialBox = BABYLON.Mesh.CreateBox("sba44" + index, 1, scene);
+        	    spatialBox.position = new BABYLON.Vector3(lastspbsx.position.x - index * 0.5, -3, -5);
+        	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+        	    //color = hsvToRgb(index2 / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
+        	    color = {r:1, g:1, b: 1};
+                spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	    spatialBoxArray4.push(spatialBox);
+                hl.addMesh(spatialBox, BABYLON.Color3.White());
+        /*
+                spatialBox = BABYLON.Mesh.CreateBox("sb2" + index, 1, scene);
+        	    spatialBox.position = new BABYLON.Vector3(-index - 2, -3, -5);
+        	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
+        	    color = hsvToRgb(index / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
+        	    spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
+        	    spatialBoxArray2.push(spatialBox);
+                */
+        	}
+            
+            
+        	scene.registerBeforeRender(function () {
+        	    var workingArray = myAnalyser.getByteFrequencyData();
+        	
+        	    //for (var i = 0; i < myAnalyser.getFrequencyBinCount() ; i++) {
+        	    for (var i = myAnalyser.getFrequencyBinCount() - 1, j = 0; i >= 0 ; i--, j++) {
+        	        spatialBoxArray[i].scaling.y =  workingArray[j] / 8;
+        	        spatialBoxArray[i].position.y =  -workingArray[j] / 32;
+                    spatialBoxArray[j].position.z =  -workingArray[i] / 32 - 5;
+        
+                    spatialBoxArray3[i].scaling.y =  workingArray[i] / 8;
+        	        spatialBoxArray3[i].position.y =  -workingArray[i] / 32;
+                    spatialBoxArray3[i].position.z =  -workingArray[i] / 32 - 5;
+        
+                   // spatialBoxArray4[i].scaling.y =  -workingArray[i] / 8;
+        	       // spatialBoxArray4[j].position.y =  workingArray[i] / 32;
+                  //  spatialBoxArray4[i].position.z =  workingArray[i] / 32;
+        
+        	        spatialBoxArray2[i].position.y =  -workingArray[j] / 32;
+                    spatialBoxArray2[i].position.z =  -workingArray[j] / 32 - 5;
+                    spatialBoxArray2[i].scaling.y =  -workingArray[j] / 8;
+        
+                    spatialBoxArray4[j].position.y =  -workingArray[j] / 32;
+                    spatialBoxArray4[j].position.z =  -workingArray[j] / 32 -5;
+                    spatialBoxArray4[j].scaling.y =  -workingArray[j] / 8;
+        	        
+                    
+        
+        	    }
+        	});
+        
+        
+        function hsvToRgb(h, s, v) {
+            	var r, g, b;
+            	var i;
+            	var f, p, q, t;
+        
+            	h = Math.max(0, Math.min(360, h));
+            	s = Math.max(0, Math.min(100, s));
+            	v = Math.max(0, Math.min(100, v));
+        
+            	s /= 100;
+            	v /= 100;
+        
+            	if(s == 0) {
+                		r = g = b = v;
+                		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+                	}
+        
+            	h /= 60; // sector 0 to 5
+            	i = Math.floor(h);
+            	f = h - i; // factorial part of h
+            	p = v * (1 - s);
+            	q = v * (1 - s * f);
+            	t = v * (1 - s * (1 - f));
+        
+            	switch(i) {
+            		case 0:
+            			r = v;
+            			g = t;
+            			b = p;
+            			break;
+            		case 1:
+            			r = q;
+            			g = v;
+            			b = p;
+            			break;
+            		case 2:
+            			r = p;
+            			g = v;
+            			b = t;
+            			break;
+            		case 3:
+            			r = p;
+            			g = q;
+            			b = v;
+            			break;
+            		case 4:
+            			r = t;
+            			g = p;
+            			b = v;
+            			break;
+            		default: // case 5:
+            			r = v;
+            			g = p;
+            			b = q;
+            	}
+            	return {r: r, g: g, b: b};
+        	}
+        
             //var miloscPlane = BABYLON.MeshBuilder.CreateBox("plane", { width: 354.5, height: 0.1, depth: 350, sideOrientation: BABYLON.Mesh.FRONTSIDE, }, scene);
             var miloscPlane = BABYLON.MeshBuilder.CreatePlane("plane", {width: 354, height: 350}, scene);
             //miloscPlane.position.y = 50;
@@ -179,6 +343,9 @@
             fountain.animations.push(animation);
             fountain.isVisible = false;
             //scene.beginAnimation(fountain, 0, 100, true);
+        
+        
+        
         
         
         	//BABYLON.SceneLoader.ImportMesh("", "./scenes/", "dummy3.babylon", scene, function (newMeshes, particleSystems, skeletons) {
@@ -295,6 +462,167 @@
         */
                 engine.hideLoadingUI();
             //});	
+         // fire material
+                    var fireMaterial = new BABYLON.StandardMaterial("fireMaterial", scene);
+                    var fireTexture = new BABYLON.FireProceduralTexture("fire", 256, scene);
+                    fireTexture.level = 2;
+                    fireTexture.vScale = 0.5;
+                    fireMaterial.diffuseColor = new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2);
+                    fireMaterial.diffuseTexture = fireTexture;
+                    fireMaterial.alpha = 1;
+                    fireMaterial.specularTexture = fireTexture;
+                    fireMaterial.emissiveTexture = fireTexture;
+                    fireMaterial.specularPower = 4;
+                    fireMaterial.backFaceCulling = false;
+                    fireTexture.fireColors = [
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2),
+                    new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2)
+                    ];
+                
+                    // initial vars
+                    var delay = 4000;
+                    var steps = Math.floor(delay / 80);;
+                
+                    var paths = [];
+                    var targetPaths = [];
+                    var m = [1, 3, 1, 5, 1, 7, 1, 9];
+                    var lat = 50;
+                    var lng = 50;
+                    var deltas = [];
+                    var colors = fireTexture.fireColors;
+                    var deltaColors = [];
+                    var morph = false;
+                    var counter = 0;
+                    var rx = 0.0;
+                    var ry = 0.0;
+                    var deltarx = Math.random() / 200;
+                    var deltary = Math.random() / 400;
+                
+                    // harmonic function : populates paths array according to m array
+                    var harmonic = function (m, lat, long, paths) {
+                        var pi = Math.PI;
+                        var pi2 = Math.PI * 2;
+                        var steplat = pi / lat;
+                        var steplon = pi2 / long;
+                        var index = 0;
+                        for (var theta = 0; theta <= pi2; theta += steplon) {
+                            var path = [];
+                            for (var phi = 0; phi <= pi; phi += steplat) {
+                                var r = 0;
+                                r += Math.pow(Math.sin(Math.floor(m[0]) * phi), Math.floor(m[1]));
+                                r += Math.pow(Math.cos(Math.floor(m[2]) * phi), Math.floor(m[3]));
+                                r += Math.pow(Math.sin(Math.floor(m[4]) * theta), Math.floor(m[5]));
+                                r += Math.pow(Math.cos(Math.floor(m[6]) * theta), Math.floor(m[7]));
+                                var p = new BABYLON.Vector3(r * Math.sin(phi) * Math.cos(theta), r * Math.cos(phi), r * Math.sin(phi) * Math.sin(theta));
+                                path.push(p);
+                            }
+                            paths[index] = path;
+                            index++;
+                        }
+                    };
+                
+                    // new SH function : fill targetPaths and delta arrays with Vector3 and colors
+                    var newSH = function (m, paths, targetPaths, deltas, deltaColors) {
+                        morph = true;
+                        var scl = 1 / steps;
+                        // new harmonic
+                        for (var i = 0; i < m.length; i++) {
+                            var rand = parseInt(Math.random() * 10);
+                            m[i] = rand;
+                        }
+                        harmonic(m, lat, lng, targetPaths);
+                        // deltas computation
+                        var index = 0;
+                        for (var p = 0; p < targetPaths.length; p++) {
+                            var targetPath = targetPaths[p];
+                            var path = paths[p];
+                            for (var i = 0; i < targetPath.length; i++) {
+                                deltas[index] = (targetPath[i].subtract(path[i])).scale(scl);
+                                index++;
+                            }
+                        }
+                        // delta colors
+                        for (var c = 0; c < colors.length; c++) {
+                            deltaColors[c] = (new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2)).subtract(colors[c]).scale(scl);
+                        }
+                        // new rotation speeds
+                        deltarx = Math.random() / 200;
+                        deltary = Math.random() / 400;
+                    };
+                
+                    // morphing function : update ribbons with intermediate m values
+                    var morphing = function (mesh, m, paths, targetPaths, deltas, deltaColors) {
+                        if (counter === steps) {
+                            counter = 0;
+                            morph = false;
+                            paths = targetPaths;
+                        }
+                        else {
+                            // update paths
+                            var index = 0;
+                            for (var p = 0; p < paths.length; p++) {
+                                var path = paths[p];
+                                for (var i = 0; i < path.length; i++) {
+                                    path[i] = path[i].add(deltas[index]);
+                                    index++;
+                                }
+                            }
+                            mesh = BABYLON.Mesh.CreateRibbon(null, paths, null, null, null, scene, null, null, mesh);
+                            // update colors
+                            for (var c = 0; c < colors.length; c++) {
+                                colors[c] = colors[c].add(deltaColors[c]);
+                            }
+                        }
+                        counter++;
+                        return mesh;
+                    };
+                
+                    // SH init & ribbon creation
+                    harmonic(m, lat, lng, paths);
+                    var mesh = BABYLON.Mesh.CreateRibbon("ribbon", paths, true, false, 0, scene, true);
+                    mesh.freezeNormals();
+                    mesh.scaling = new BABYLON.Vector3(1, 1, 1);
+                    mesh.material = fireMaterial;
+                    // Volumetric Light
+                    var volLight = new BABYLON.VolumetricLightScatteringPostProcess("vl", 1.0, camera, mesh, 50, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+                    volLight.exposure = 0.15;
+                    volLight.decay = 0.95;
+                    volLight.weight = 0.5;
+                
+                    // interval setting
+                    var interval = window.setInterval(function () {
+                        newSH(m, paths, targetPaths, deltas, deltaColors);
+                        mesh = morphing(mesh, m, paths, targetPaths, deltas, deltaColors);
+                    }, delay);
+                
+                    // immediate first SH
+                    newSH(m, paths, targetPaths, deltas, deltaColors);
+                
+                    // then animation
+                    scene.registerBeforeRender(function () {
+                        if (morph) {
+                            mesh = morphing(mesh, m, paths, targetPaths, deltas, deltaColors);
+                        }
+                        rx += deltarx;
+                        ry -= deltary;
+                        mesh.rotation.y = ry;
+                        mesh.rotation.z = rx;
+               
+                        mesh.position.y = -5.5;
+                        mesh.position.x = -1.75;
+                        mesh.position.z = 2.5;
+                        mesh.scaling = new BABYLON.Vector3(0.25, 0.25, 0.25);
+                    });
+                
+                    scene.onDispose = function () {
+                        clearInterval(interval);
+                    }
+        
+        
         
             return scene;
         };
