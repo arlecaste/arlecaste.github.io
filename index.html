@@ -132,8 +132,12 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, -5
     var fountain = BABYLON.Mesh.CreateBox("foutain", 1.0, scene);
     //fountain.position.z = 5;
     fountain.position.y = -8;
-                fountain.position.x = 8;
-                fountain.position.z = 5;
+                //fountain.position.x = 8;
+                //fountain.position.z = 5;
+	
+	fountain.position.z = -5;
+    	fountain.position.y = -3;
+	fountain.isVisible = false;
     fountain.rotation = new BABYLON.Vector3(0, Math.PI, 0);
     // Create a particle system
     var particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
@@ -228,7 +232,7 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, -5
         
          var mat = new BABYLON.StandardMaterial("milosc", scene);
           //mat.diffuseTexture = new BABYLON.Texture("https://upload.wikimedia.org/wikipedia/commons/8/87/Alaskan_Malamute%2BBlank.png", scene);
-          mat.diffuseTexture = new BABYLON.Texture("https://raw.githubusercontent.com/arlecaste/arlecaste.github.io/master/textures/pics/milosc.jpg", scene);
+          mat.diffuseTexture = new BABYLON.Texture("https://raw.githubusercontent.com/arlecaste/arlecaste.github.io/master/textures/pics/milosc13.png", scene);
           mat.diffuseTexture.hasAlpha = true;
           mat.backFaceCulling = false;
           //var box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
