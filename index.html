@@ -58,6 +58,18 @@
         
             var scene = new BABYLON.Scene(engine);
             scene.clearColor = BABYLON.Color3.Black();
+            
+            
+            var skybox = BABYLON.Mesh.CreateBox("skyBox", 5000.0, scene);
+    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("//www.babylonjs.com/assets/skybox/TropicalSunnyDay", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.disableLighting = true;
+    skybox.material = skyboxMaterial;
+            
             var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2, 30, new BABYLON.Vector3(0, 1, 0), scene);
             camera.attachControl(canvas, true);
         
@@ -84,7 +96,7 @@
             engine.displayLoadingUI();
         
         //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
-        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",
+        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3",
                 scene, null, { streaming: true, autoplay: true });
             
         var myAnalyser = new BABYLON.Analyser(scene);
@@ -104,7 +116,8 @@
         	    spatialBox.position = new BABYLON.Vector3(index * 0.5 + 4, -3, -5);
         	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
                 
-                hl.addMesh(spatialBox, BABYLON.Color3.White());
+                //hl.addMesh(spatialBox, BABYLON.Color3.White());
+                hl.addMesh(spatialBox, BABYLON.Color3.Black());
         	    //color = hsvToRgb(index / (myAnalyser.FFT_SIZE) / 2 * 360, 100, 50),
         	    color = {r:1, g:1, b: 1};
                 spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
@@ -126,7 +139,8 @@
         	    spatialBox.material = new BABYLON.StandardMaterial("sbm" + index, scene);
                 color = {r:1, g:1, b: 1};	    
                 spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
-                hl.addMesh(spatialBox, BABYLON.Color3.White());
+                //hl.addMesh(spatialBox, BABYLON.Color3.White());
+                hl.addMesh(spatialBox, BABYLON.Color3.Black());
         	    spatialBoxArray2.push(spatialBox);
         	}
         	var lastspb = spatialBoxArray[spatialBoxArray.length - 1];
@@ -141,7 +155,8 @@
         	    color = {r:1, g:1, b: 1};
                 spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
         	    spatialBoxArray3.push(spatialBox);
-                hl.addMesh(spatialBox, BABYLON.Color3.White());
+                //hl.addMesh(spatialBox, BABYLON.Color3.White());
+                hl.addMesh(spatialBox, BABYLON.Color3.Black());
         
                 spatialBox = BABYLON.Mesh.CreateBox("sba44" + index, 1, scene);
         	    spatialBox.position = new BABYLON.Vector3(lastspbsx.position.x - index * 0.5, -3, -5);
@@ -150,7 +165,8 @@
         	    color = {r:1, g:1, b: 1};
                 spatialBox.material.diffuseColor = new BABYLON.Color3(color.r, color.g, color.b);
         	    spatialBoxArray4.push(spatialBox);
-                hl.addMesh(spatialBox, BABYLON.Color3.White());
+                //hl.addMesh(spatialBox, BABYLON.Color3.White());
+                hl.addMesh(spatialBox, BABYLON.Color3.Black());
         /*
                 spatialBox = BABYLON.Mesh.CreateBox("sb2" + index, 1, scene);
         	    spatialBox.position = new BABYLON.Vector3(-index - 2, -3, -5);
