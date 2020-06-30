@@ -96,7 +96,7 @@
             engine.displayLoadingUI();
         
         //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
-        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3",
+        var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sky_High_Elektronica.mp3",
                 scene, null, { streaming: true, autoplay: true });
             
         var myAnalyser = new BABYLON.Analyser(scene);
@@ -644,6 +644,220 @@
             return scene;
         };
         
+        /*
+	How to use the Web Audio 3D Analyser to create stunning effects
+	by Steve 'Stv' Duran for BabylonJS featured demos on 06.12.2015
+*/
+var bar = [];
+var square = "//www.babylonjs.com/demos/AudioAnalyser/square.jpg";
+var bjs = "//www.babylonjs.com/demos/AudioAnalyser/metal.png";
+var fft;
+
+// Better random function
+function rnd(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function hsvToRgb(h, s, v) {
+            	var r, g, b;
+            	var i;
+            	var f, p, q, t;
+        
+            	h = Math.max(0, Math.min(360, h));
+            	s = Math.max(0, Math.min(100, s));
+            	v = Math.max(0, Math.min(100, v));
+        
+            	s /= 100;
+            	v /= 100;
+        
+            	if(s == 0) {
+                		r = g = b = v;
+                		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+                	}
+        
+            	h /= 60; // sector 0 to 5
+            	i = Math.floor(h);
+            	f = h - i; // factorial part of h
+            	p = v * (1 - s);
+            	q = v * (1 - s * f);
+            	t = v * (1 - s * (1 - f));
+        
+            	switch(i) {
+            		case 0:
+            			r = v;
+            			g = t;
+            			b = p;
+            			break;
+            		case 1:
+            			r = q;
+            			g = v;
+            			b = p;
+            			break;
+            		case 2:
+            			r = p;
+            			g = v;
+            			b = t;
+            			break;
+            		case 3:
+            			r = p;
+            			g = q;
+            			b = v;
+            			break;
+            		case 4:
+            			r = t;
+            			g = p;
+            			b = v;
+            			break;
+            		default: // case 5:
+            			r = v;
+            			g = p;
+            			b = q;
+            	}
+            	return {r: r, g: g, b: b};
+        	}
+var color;
+// Create the equalizer
+function createRingcubes(r, nb, scene) {
+    var TWO_PI = Math.PI * 2;
+    var angle = TWO_PI / nb;
+    var cube;
+
+    // Create a really cool metal material with bump :)
+    var m1 = new BABYLON.StandardMaterial("m", scene);
+    //m1.diffuseTexture = new BABYLON.Texture(square, scene);
+    //m1.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/demos/AudioAnalyser/grained_uv.png", scene);
+    m1.reflectionTexture = new BABYLON.Texture(bjs, scene);
+    m1.reflectionTexture.level = 0.8;
+    m1.reflectionTexture.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
+    m1.diffuseColor = new BABYLON.Color3(0.15, 0.81, 0.37);
+    for (var i = 0; i <= nb; i++) {
+        if (i === 0) {
+            bar[i] = BABYLON.Mesh.CreateBox("b", 0.02, scene);
+
+            bar[i].material = m1;
+            //color = hsvToRgb(index / nb / 2 , 100, 50),
+            //bar[i].material.diffuseColor = new BABYLON.Color3(0.83, 0.14, 0.31);
+            bar[i].isVisible = false;
+        }
+        else {
+            bar[i] = bar[0].createInstance("b" + i);
+
+            bar[i].position.x = r * Math.sin(angle * i);
+            bar[i].position.y = r * Math.cos(angle * i);
+            bar[i].position.z = 0;
+
+            bar[i].scaling.y = 20.0;
+            bar[i].scaling.x = 200.0;
+
+            // Remember, you learned it in the "Lookat" PG !
+            bar[i].lookAt(new BABYLON.Vector3(0, 0, 0));
+        }
+    
+    }
+}
+
+var createScene = function (engine) {
+    var scene = new BABYLON.Scene(engine);
+    scene.clearColor = BABYLON.Color3.Black();
+
+    var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 100, BABYLON.Vector3.Zero(), scene);
+    camera.setTarget(BABYLON.Vector3.Zero());
+    camera.attachControl(canvas, true);
+
+    //var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+	var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 4, 0), scene);
+	light.intensity = 0.6;
+	light.specular = BABYLON.Color3.Black();
+
+
+var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5), scene);
+	light.intensity = 0.6;
+	light.specular = BABYLON.Color3.Black();
+    // Streaming sound using HTML5 Audio element
+    var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",
+        scene, null, { streaming: true, autoplay: false });
+
+    // Here we go !
+    createRingcubes(30, 256, scene);
+
+    // Create some cool material.
+    var mball = new BABYLON.StandardMaterial("m", scene);
+    mball.backFaceCulling = false;
+    mball.bumpTexture = new BABYLON.Texture("//www.babylonjs.com/demos/AudioAnalyser/grained_uv.png", scene);
+    mball.reflectionTexture = new BABYLON.Texture(bjs, scene);
+    mball.reflectionTexture.level = 0.8;
+    mball.reflectionTexture.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
+
+    // Center sphere
+    //var sphere = BABYLON.Mesh.CreateSphere("s", 32, 20, scene);
+    //sphere.material = mball;
+
+
+ //var miloscPlane = BABYLON.MeshBuilder.CreateBox("plane", { width: 354.5, height: 0.1, depth: 350, sideOrientation: BABYLON.Mesh.FRONTSIDE, }, scene);
+    var miloscPlane = BABYLON.MeshBuilder.CreatePlane("plane", {width: 290, height: 319}, scene);
+    //miloscPlane.position.y = 50;
+    miloscPlane.rotation = new BABYLON.Vector3(Math.PI, 0, Math.PI);
+    miloscPlane.scaling = new BABYLON.Vector3(0.125, 0.125, 1);
+    miloscPlane.position.z = 0;
+    
+    var miloscMat = new BABYLON.StandardMaterial("milosc", scene);
+        miloscMat.diffuseTexture = new BABYLON.Texture("https://arlecaste.github.io/textures/pics/milosc_002_3.png", scene);
+        miloscMat.diffuseTexture.hasAlpha = true;
+        miloscMat.backFaceCulling = false;
+
+    miloscPlane.material = miloscMat;
+
+var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/tropical_background.jpg', scene, true);
+
+/*
+        var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
+var bg = new BABYLON.Sprite("bg", spriteManagerBG);
+bg.position.z = 60;
+bg.size = 100;
+*/
+/*
+    //We create 2000 trees at random positions
+    for (var i = 0; i < 2000; i++) {
+        var tree = new BABYLON.Sprite("tree", spriteManagerTrees);
+        tree.position.x = Math.random() * 100 - 50;
+        tree.position.z = Math.random() * 100 - 50;
+        tree.isPickable = true;
+
+        //Some "dead" trees
+        if (Math.round(Math.random() * 5) === 0) {
+            tree.angle = Math.PI * 90 / 180;
+            tree.position.y = -0.3;
+        }
+    }
+*/
+
+    // Start the analyser
+    var myAnalyser = new BABYLON.Analyser(scene);
+    BABYLON.Engine.audioEngine.connectToAnalyser(myAnalyser);
+    myAnalyser.FFT_SIZE = 512;
+    myAnalyser.SMOOTHING = 0.9;
+
+    var t = 0.0;
+    scene.registerBeforeRender(function () {
+
+        fft = myAnalyser.getByteFrequencyData();
+
+        // Scale cubes according to music ! :)
+        // here we multiply by 4 because we are working on a very little scene like (20x20x20)
+        for (var i = 0; i < bar.length; i++) {
+            bar[i].scaling.z = fft[i] * 4;
+        }
+
+        // Move camera
+        //camera.alpha = 4.0 * (Math.PI / 20 + Math.cos(t / 35));
+       // camera.beta = 1.5 * (Math.PI / 20 + Math.sin(t / 50));
+        //camera.radius = 100 + (-25 + 25 * Math.sin(t / 30));
+
+        //t += 0.1;
+    });
+
+    return scene;
+};
 var engine;
 try {
     engine = createDefaultEngine();
@@ -652,7 +866,7 @@ try {
     engine = createDefaultEngine();
 }
         if (!engine) throw 'engine should not be null.';
-        scene = delayCreateScene();;
+        scene = createScene();;
         sceneToRender = scene
 
         engine.runRenderLoop(function () {
