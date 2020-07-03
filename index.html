@@ -774,9 +774,26 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 	light.intensity = 0.6;
 	light.specular = BABYLON.Color3.Black();
     // Streaming sound using HTML5 Audio element
-    var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sky_High_Elektronica.mp3",
+    var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",
         scene, null, { streaming: true, autoplay: true });
 
+	music.onended = function() {
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3",
+        	scene, null, { streaming: true, autoplay: true });
+		
+		music1.onended = function() {
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/energy_lektronica.mp3",
+        	scene, null, { streaming: true, autoplay: true });
+			
+			music2.onended = function() {
+			var music3 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/eternal.mp3",
+        		scene, null, { streaming: true, autoplay: true });
+			};
+		};
+		
+		
+};
+	
     // Here we go !
     createRingcubes(30, 256, scene);
 
