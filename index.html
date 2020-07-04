@@ -776,12 +776,12 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     // Streaming sound using HTML5 Audio element
     //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",
 				  //
-	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Kygo - Sunrise ft. Jason Walker (Lyrics) .mp3.mp3",
+	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sunrise.mp3",
 
         scene, null, { streaming: true, autoplay: true });
 
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Axwell Λ Ingrosso - Dreamer (Lyrics Lyric Video) ft. Trevor Guthrie (1).mp3.mp3",
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream",
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
