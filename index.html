@@ -44,13 +44,18 @@
 		color: rgba(255, 255, 255);
             }
 		
-		#bottom{
-                {
-  position: fixed;
-  left: 50%;
-  bottom: 0px;
-}
-            }
+		#footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				z-index: 2;
+				left: 50%;
+				color: white;
+			}
+			#center {
+				height: 200px;
+				right: 50%;
+			}
         </style>
     </head>
 <body>
@@ -60,10 +65,12 @@
 		<h2><label>Hello Milosc</label></h2>
 		<input type="color" id="colorPicker" name="head" value="#e66465">
         </div>
-	<div id="bottom">
-            
-		<h2><label>Slider</label></h2>
-        </div>
+	
+	<div id="footer">
+        	<div id="center">
+            		<img src="https://1.bp.blogspot.com/-XIpqllJjey8/XQKu2rcm7YI/AAAAAAAAJp4/IGUmMs3nwowKdkMuwgpfaI4VFGHNb3z6QCK4BGAYYCw/s1600/glossy%2Bplay%2Bbutton.png" width="50px" height="50px"></img>
+        	</div>
+    	</div>
     <script>
 	    
         var canvas = document.getElementById("renderCanvas");
