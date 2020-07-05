@@ -23,23 +23,32 @@
         <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
 
         <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
 
             #renderCanvas {
                 width: 100%;
                 height: 100%;
                 touch-action: none;
+		z-index: 1;
+		position:absolute;
+            }
+		#menu{
+                width: 100px;
+                height: 100%;
+		z-index: 2;
+		position:relative;
+		top: 0px;
+		left: 0px;
+		margin-top: 50px;
             }
         </style>
     </head>
 <body>
     <canvas id="renderCanvas"></canvas>
+	<div id="menu">
+            
+		<label>Circle color</label>
+		<input type="color" id="colorPicker" name="head" value="#e66465">
+        </div>
     <script>
         var canvas = document.getElementById("renderCanvas");
 
@@ -781,11 +790,11 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
         scene, null, { streaming: true, autoplay: true });
 
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream",
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream.mp3",
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
-		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3.mp3",
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3",
         	scene, null, { streaming: true, autoplay: true });
 			
 			music2.onended = function() {
