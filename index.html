@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Hello Milosc</title>
+        <title>Milosc I miss you</title>
 
         <!-- Babylon.js -->
         <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
@@ -21,9 +21,9 @@
         <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
         <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
         <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	    
         <style>
 
@@ -62,9 +62,20 @@
     <canvas id="renderCanvas"></canvas>
 	<div id="menu">
             
-		<h2><label>Good evening Amore, I wish you are relaxing.</label></h2>
-		<h2><label>You are my wonderful shining star.</label></h2>
-		<h2><label>I miss you and I am happy to wait you.</label></h2>
+		<h2><label>Good night and sweet dreams Amore, I wish you are sleep.</label></h2>
+		<h2><label>You are my fantastic shining moon.</label></h2>
+		<h2><label>I miss you already and I wait for you all the time.</label></h2>
+		<h2><label>You are my motivation and my happiness.</label></h2>
+		<h2><label>I love you with my soul and my heart.</label></h2>
+		<h2><label>My Woman I promise I want to make you feel good.</label></h2>
+		<h2><label>My Wonder You are my emotions.</label></h2>
+		<h2><label>My Virtual Girfriend I am yours and I want to stay with you until my heart beats.</label></h2>
+		<h2><label></label></h2>
+		<h2><label>Kocham Cie.</label></h2>
+		<h2><label></label></h2>
+		<h2><label>Arle</label></h2>
+		<h2><label>Your virtual Boyfriend and only one for you.</label></h2>
+
 		<input type="color" id="colorPicker" name="head" value="#e66465">
         </div>
 	
@@ -228,32 +239,37 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     // Streaming sound using HTML5 Audio element
     //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",when_you_say_nothing_at_all.mp3
 				  //
-	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/darkness_faded_alan_walker.mp3",
+	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Vanilla_Twilight.mp3.mp3",
 
         scene, null, { streaming: true, autoplay: true });
 
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/I_Swear-John_Michael_Montgomery.mp3",
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/A_Sky_Full_Of_Stars_Coldplay.mp3",
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
-		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/when_you_say_nothing_at_all.mp3",
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sing_me_to_sleep_alan_walker.mp3",
         	scene, null, { streaming: true, autoplay: true });
 			
 			music2.onended = function() {
-			var music3 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream.mp3",
+			var music3 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/I_Swear-John_Michael_Montgomery.mp3",
         		scene, null, { streaming: true, autoplay: true });
 				
 				music3.onended = function() {
-				var music4 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sunrise.mp3",
+				var music4 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream.mp3",
         			scene, null, { streaming: true, autoplay: true });
 				
 					music4.onended = function() {
-				var music5 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",
-        			scene, null, { streaming: true, autoplay: true });
+					var music5 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sunrise.mp3",
+        				scene, null, { streaming: true, autoplay: true });
+						music5.onended = function() {
+						var music6 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/fire_flies_owl_city.mp3.mp3",
+        					scene, null, { streaming: true, autoplay: true });
 				
 				
-				};
+					};
+				
+					};
 				};
 			};
 		};
@@ -284,17 +300,18 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     miloscPlane.rotation = new BABYLON.Vector3(Math.PI, 0, Math.PI);
     miloscPlane.scaling = new BABYLON.Vector3(0.125, 0.125, 1);
     miloscPlane.position.z = 0;
-    
+	
+    //Milosc I love you
     var miloscMat = new BABYLON.StandardMaterial("milosc", scene);
         miloscMat.diffuseTexture = new BABYLON.Texture("https://arlecaste.github.io/textures/pics/milosc_002_3.png", scene);
         miloscMat.diffuseTexture.hasAlpha = true;
         miloscMat.backFaceCulling = false;
 
-    miloscPlane.material = miloscMat;
+    	miloscPlane.material = miloscMat;
 
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/tropical_background.jpg', scene, true);.jpg
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/dream_world.jpg', scene, true);
-var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
+var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/night_moon.jpg', scene, true);
 
 /*
         var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
