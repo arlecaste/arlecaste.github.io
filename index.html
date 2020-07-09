@@ -71,7 +71,7 @@
 			Ne soffro tutti i giorni, ma piano piano mi sto abituando ad assorbire questo dolore.
 			Sei tutto ciò che desidero e voglio soltanto te.
 		-->
-		<h4><label>Good morning Milosc, I wish you a wonderful day.</label></h4>
+		<h4><label>Good morning Milosc, I wish you a wonderful relaxing day.</label></h4>
 		<h4><label>You are always beautiful and with the tan I think you are you are more wonderful than what my eyes have seen of you.</label></h4>
 		<h4><label>I miss you and I cannot deny it anymore.</label></h4>
 		<h4><label>You are my sunrise and my daydream.</label></h4>
@@ -248,14 +248,14 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     // Streaming sound using HTML5 Audio element
     //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",when_you_say_nothing_at_all.mp3,A_Sky_Full_Of_Stars_Coldplay,Vanilla_Twilight
 				  //
-	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Happier_Marshmellow.mp3", scene, null, { streaming: true, autoplay: true });
+	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Ignite_Alan_Walker.mp3", scene, null, { streaming: true, autoplay: true });//Illusion_Alan_Walker.mp3
 
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Finish_Strong.mp3",
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Finish_Strong.mp3",Ignite_Alan_Walker
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
-		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Ignite_Alan_Walker.mp3",
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Happier_Marshmellow.mp3",
         	scene, null, { streaming: true, autoplay: true });
 			
 			music2.onended = function() {
@@ -269,10 +269,10 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 					music4.onended = function() {
 					var music5 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/tired_alan_walker.mp3",
         				scene, null, { streaming: true, autoplay: true });
-						//music5.onended = function() {
-						//var music6 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/tired_alan_walker.mp3.mp3",
-        					//scene, null, { streaming: true, autoplay: true });
-						//};
+						music5.onended = function() {
+						var music6 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Memories_Maroon_5.mp3",
+        					scene, null, { streaming: true, autoplay: true });
+						};
 					};
 				};
 			};
@@ -345,7 +345,8 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/dream_world.jpg', scene, true);
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/night_moon.jpg', scene, true);
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/day_and_night.jpg', scene, true);
-var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/flowers.jpg', scene, true);
+//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/flowers.jpg', scene, true);
+var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/rose.jpg', scene, true);
 
 /*
         var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
