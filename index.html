@@ -65,7 +65,8 @@
     <canvas id="renderCanvas"></canvas>
 	<div id="menu">
             
-		<h4><label>Good night and sweet dreams Amore, I wish you a relaxing sleep.</label></h4>
+		<h4><label>Good night Milosc I wish you fantastic sweet dreams.</label></h4>
+		<!--
 		<h4><label>You are my fantastic shining moon.</label></h4>
 		<h4><label>I miss you already and I wait for you all the time.</label></h4>
 		<h4><label>You are my motivation and my happiness.</label></h4>
@@ -79,7 +80,7 @@
 		<h4><label></label></h4>
 		<h4><label>Arle</label></h4>
 		<h4><label>Your virtual Boyfriend, happy to be your sweetheart and the only one for you.</label></h4>
-			
+			-->
 		<input type="color" id="colorPicker" name="head" value="#556B2F"><!--#556B2F dark olive green-->
         </div>
 	
@@ -243,16 +244,16 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     // Streaming sound using HTML5 Audio element
     //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",when_you_say_nothing_at_all.mp3
 				  //
-	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Vanilla_Twilight.mp3",
+	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/fire_flies_owl_city.mp3",
 
         scene, null, { streaming: true, autoplay: true });
 
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/A_Sky_Full_Of_Stars_Coldplay.mp3",
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sing_me_to_sleep_alan_walker.mp3",
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
-		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sing_me_to_sleep_alan_walker.mp3",
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/dream.mp3",
         	scene, null, { streaming: true, autoplay: true });
 			
 			music2.onended = function() {
@@ -267,7 +268,7 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 					var music5 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/sunrise.mp3",
         				scene, null, { streaming: true, autoplay: true });
 						music5.onended = function() {
-						var music6 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/fire_flies_owl_city.mp3.mp3",
+						var music6 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Vanilla_Twilight.mp3.mp3",
         					scene, null, { streaming: true, autoplay: true });
 				
 				
