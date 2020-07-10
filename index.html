@@ -223,7 +223,11 @@ function createRingcubes(r, nb, scene) {
     
     }
 }
+	    
+var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
+
+	    
 var createScene = function (engine) {
     var scene = new BABYLON.Scene(engine);
     scene.clearColor = BABYLON.Color3.Black();
@@ -318,8 +322,23 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/dream_world.jpg', scene, true);
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/night_moon.jpg', scene, true);
 //var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/day_and_night.jpg', scene, true);
-var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
+//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
 
+	if (orientation === "landscape-primary") {
+  console.log("That looks good.");
+		var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
+} else if (orientation === "landscape-secondary") {
+  console.log("Mmmh... the screen is upside down!");
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/day_and_night.jpg', scene, true);
+} else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+  console.log("Mmmh... you should rotate your device to landscape");
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+} else if (orientation === undefined) {
+  console.log("The orientation API isn't supported in this browser :("); 
+}
+	
+	
 /*
         var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
 var bg = new BABYLON.Sprite("bg", spriteManagerBG);
