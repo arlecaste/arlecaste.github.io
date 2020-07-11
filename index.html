@@ -316,20 +316,24 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantastic_sky.jpg', scene, true);
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/lovers_on_a_starry_night_sky.jpg', scene, true);
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_portrait.jpg', scene, true);
-	theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
+	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
 	//
 	
 var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 	if (orientation === "landscape-primary") {
   console.log("That looks good.");
-		var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
+		//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantasy_love.jpg', scene, true);
+		var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/breakfast_landscape.jpg', scene, true);
 } else if (orientation === "landscape-secondary") {
   console.log("Mmmh... the screen is upside down!");
-	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/day_and_night.jpg', scene, true);
+	//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/day_and_night.jpg', scene, true);
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/breakfast_landscape.jpg', scene, true);
 } else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
-	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+	//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
   console.log("Mmmh... you should rotate your device to landscape");
-	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+	//var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/nature_portrait.jpg', scene, true);
+	var layer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
 } else if (orientation === undefined) {
   console.log("The orientation API isn't supported in this browser :("); 
 }
