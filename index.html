@@ -37,11 +37,12 @@
 		position:fixed;
             }
 		#menu{
-                width: 500px;
-                height: 100%;
+                width: 100%;
+                height: 70%;
 		z-index: 2;
 		position:fixed;
 		top: 31px;
+		text-align: center;
 		/*background-color: rgba(211, 42, 23, 100);*/
 		color: rgba(255, 255, 255);
 		/*overflow-y: scroll;*/
@@ -65,11 +66,7 @@
     <canvas id="renderCanvas"></canvas>
 	<div id="menu">
             
-		<h2><label style="backgroundColor: #FBFB00;">Good evening my Wonderful Sacred Woman.</label></h2>
-		<h2><label style="backgroundColor: #FBFB00">I wish you a relaxing position to feel less hurt.</label></h2>
-		<h2><label style="backgroundColor: #FBFB00">Your presence is very special for me and especially for my heart.</label></h2>
-		<h2><label style="backgroundColor: #FBFB00">You are my cure and I need you.</label></h2>
-		<h2><label style="backgroundColor: #FBFB00">I am happy only with you.</label></h2>
+		<h1><label style="backgroundColor: #FBFB00;">Good morning moja piekna Pani.</label></h1>
 
 		<input type="color" id="colorPicker" name="head" value="#556B2F"><!--#556B2F dark olive green-->
         </div>
@@ -238,13 +235,13 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
     // Streaming sound using HTML5 Audio element
     //var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/velocity.mp3",when_you_say_nothing_at_all.mp3
 				  //
-	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Illusion_Alan_Walker.mp3",//fire_flies_owl_city.mp3//Illusion_Alan_Walker.mp3//anxiety.mp3
+	var music = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/anxiety.mp3",//fire_flies_owl_city.mp3//Illusion_Alan_Walker.mp3//anxiety.mp3//Greatness_Alan_Walker
 
         scene, null, { streaming: true, autoplay: true });
 
 	//Karolina sei fantastica, desidero il tuo amore più di ogni altra cosa in questo mondo.
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",//sing_me_to_sleep_alan_walker.mp3//byte_alan_walker.mp3//girls_like_you
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",//sing_me_to_sleep_alan_walker.mp3//byte_alan_walker.mp3//girls_like_you//Illusion_Alan_Walker
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
@@ -317,7 +314,9 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 //theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/sunse2.jpg', scene, true);Beautiful_flower.jpg
 //theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/Beautiful_flower.jpg', scene, true);
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/fantastic_sky.jpg', scene, true);
-	theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/lovers_on_a_starry_night_sky.jpg', scene, true);
+	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/lovers_on_a_starry_night_sky.jpg', scene, true);
+	theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_portrait.jpg', scene, true);
+	//
 	/*
 var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 	if (orientation === "landscape-primary") {
