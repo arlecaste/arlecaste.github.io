@@ -318,7 +318,7 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_portrait.jpg', scene, true);
 	theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
 	//
-	/*
+	
 var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 	if (orientation === "landscape-primary") {
   console.log("That looks good.");
@@ -333,7 +333,7 @@ var orientation = (screen.orientation || {}).type || screen.mozOrientation || sc
 } else if (orientation === undefined) {
   console.log("The orientation API isn't supported in this browser :("); 
 }
-*/	
+
 	
 /*
         var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
@@ -416,12 +416,12 @@ try {
 	    function doOnOrientationChange() {
     switch(window.orientation) {  
       case -90: case 90:
-		    theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/lovers_on_a_starry_night_sky.jpg', scene, true);
+		    theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/breakfast_landscape.jpg', scene, true);
         //alert('landscape');
         break; 
       default:
         //alert('portrait');
-		    theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/Beautiful_flower.jpg', scene, true);
+		    theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
         break; 
     }
 }
