@@ -66,8 +66,10 @@
     <canvas id="renderCanvas"></canvas>
 	<div id="menu">
             
-		<h1><label style="backgroundColor: #FBFB00;">Good morning moja piekna Pani.</label></h1>
-
+		<h1><label style="backgroundColor: #FBFB00;">Good morning Milosc.</label></h1>
+		<h1><label style="backgroundColor: #FBFB00;">I wish you the happiness and to feel less pain for the muscle.</label></h1>
+		<h1><label style="backgroundColor: #FBFB00;">I wish you the happiness and to feel less pain for the muscle.</label></h1>
+		<h2><a href="www.arle.one">My new dns, trying to perform better...</a></h2>
 		<input type="color" id="colorPicker" name="head" value="#556B2F"><!--#556B2F dark olive green-->
         </div>
 	
@@ -317,8 +319,9 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/lovers_on_a_starry_night_sky.jpg', scene, true);
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_portrait.jpg', scene, true);
 	//theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/coffee_2.jpg', scene, true);
+	theLayer = new BABYLON.Layer('','https://arlecaste.github.io/textures/flowers_blurred.png', scene, true);
 	//
-	
+	/*
 var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 	if (orientation === "landscape-primary") {
   console.log("That looks good.");
@@ -337,7 +340,7 @@ var orientation = (screen.orientation || {}).type || screen.mozOrientation || sc
 } else if (orientation === undefined) {
   console.log("The orientation API isn't supported in this browser :("); 
 }
-
+*/
 	
 /*
         var spriteManagerBG = new BABYLON.SpriteManager("bgtexture", "https://arlecaste.github.io/textures/tropical_background.jpg", 1920 * 2, 1000, scene);
@@ -430,7 +433,7 @@ try {
     }
 }
   
-window.addEventListener('orientationchange', doOnOrientationChange);
+//window.addEventListener('orientationchange', doOnOrientationChange);
 	    
         // Resize
         window.addEventListener("resize", function () {
