@@ -65,11 +65,16 @@
 <body>
     <canvas id="renderCanvas"></canvas>
 	<div id="menu">
-            
+            	<h1><label style="backgroundColor: #FBFB00;">Good morning my Wonder.</label></h1>
+		<h1><label style="backgroundColor: #FBFB00;">You are amazing.</label></h1>
+		<h1><label style="backgroundColor: #FBFB00;">Your presence is my essence.</label></h1>
+		<h2><a href="https://www.arle.one">Work in progress here...</a></h2>
+		<!--
 		<h1><label style="backgroundColor: #FBFB00;">Good morning Milosc.</label></h1>
 		<h1><label style="backgroundColor: #FBFB00;">I wish you the happiness and to feel less pain for the muscle.</label></h1>
 		<h1><label style="backgroundColor: #FBFB00;">You are my sweet dreams.</label></h1>
 		<h2><a href="https://www.arle.one">I am trying to perform better here...</a></h2>
+-->
 		<input type="color" id="colorPicker" name="head" value="#556B2F"><!--#556B2F dark olive green-->
         </div>
 	
@@ -243,11 +248,11 @@ var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, 4, 5)
 
 	//Karolina sei fantastica, desidero il tuo amore più di ogni altra cosa in questo mondo.
 	music.onended = function() {
-		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",//sing_me_to_sleep_alan_walker.mp3//byte_alan_walker.mp3//girls_like_you//Illusion_Alan_Walker
+		var music1 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Happy_With_You_WildDHearts.mp3",//sing_me_to_sleep_alan_walker.mp3//byte_alan_walker.mp3//girls_like_you//Illusion_Alan_Walker
         	scene, null, { streaming: true, autoplay: true });
 		
 		music1.onended = function() {
-		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/Sunrise_Alan_Walker.mp3",//dream//Sunrise_Alan_Walker.mp3//All_We_Know_Chainsmokers
+		var music2 = new BABYLON.Sound("Music", "//arlecaste.github.io/scenes/byte_alan_walker.mp3",//dream//Sunrise_Alan_Walker.mp3//All_We_Know_Chainsmokers
         	scene, null, { streaming: true, autoplay: true });
 			
 			music2.onended = function() {
